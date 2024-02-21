@@ -13,7 +13,7 @@ searchForm.addEventListener("submit", (e) => {
 });
 async function fetchAPI() {
   //With "to" in the url we set the results of recipes to 20;
-  const baseUrl = `https://api.edamam.com/search?q=pizza&app_id=${APP_ID}&app_key=${APP_KEY}&to=20`;
+  const baseUrl = `https://api.edamam.com/search?q=${searchQuery}&app_id=${APP_ID}&app_key=${APP_KEY}&to=20`;
   const response = await fetch(baseUrl);
   const data = await response.json(); //Here is the data with the recipes and the pictures
   generateHTML(data.hits); //As we can see on the screenshot provided the hits is the array with the recipes
@@ -37,6 +37,8 @@ function generateHTML(results) {
           <a class="view-btn" href="${result.recipe.url}" target = "_blank">View Recipe</a>
         </div>
         <p class="item-data">Calories: ${result.recipe.calories.toFixed(2)}</p>
+        <p class="item-data">Diet Label: ${result.recipe.dietLabels.length > 0 ? result.recipe.dietLabels : "No Data Found"}</p>
+        <p class="item-data">Health Label: ${result.recipe.healthLabels}</p>
       </div>`;
   })
   //Add the forms to the website
