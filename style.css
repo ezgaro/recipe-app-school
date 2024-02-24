@@ -168,3 +168,21 @@ a {
   color: var(--color-4);
   text-decoration: none;
 }
+/*Small show more button styling*/
+.small-btn {
+  background-color: #404041; /* Black background */
+  border: none; /* Remove border */
+  color: whitesmoke; /* Whitesmoke text */
+  padding: 12px 12px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block;
+  font-size: 1.4 rem;
+  margin: 4px 2px;
+  cursor: pointer; /* Mouse pointer on hover */
+  transition-duration: 0.4s; /* Transition effects */
+  border-radius: 4px; /* Rounded corners */
+}
+.hidden {
+  display: none;
+}

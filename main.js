@@ -20,8 +20,14 @@ async function fetchAPI() {
 }
 
 
-//Every time we are looping through this array we are creating an item which is a blueprint for the recipes forms
-//TODO Add functionality for ingrediands array of data ideas:smth like other btn to click on to go to other page idk 
+function showMoreLabels(button) {
+  const hiddenLabels = button.parentNode.querySelectorAll('.label.hidden');
+  hiddenLabels.forEach(label => label.classList.remove('hidden'));
+
+  // Hide the "Show More" button
+  button.style.display = 'none';
+}
+//Every time we are looping through this array we are creating an item which is a blueprint for the recipes forms 
 function generateHTML(results) {
   //Changing the brand name and search bar when we search smth it becomes smaller
   container.classList.remove("initial");
@@ -40,10 +46,18 @@ function generateHTML(results) {
       </div>
       <p class="item-data">Calories: ${result.recipe.calories.toFixed(2)}</p>
       <p class="item-data">Diet label: ${result.recipe.dietLabels.length > 0 ? result.recipe.dietLabels : 'No Data Found'}</p>
-      <p class="item-data">Health labels: ${result.recipe.healthLabels}</p>
+      <p class="item-data">Health labels: 
+      <span class="label">${result.recipe.healthLabels[0]}</span>
+      <span class="label">${result.recipe.healthLabels[1]}</span>
+      ${result.recipe.healthLabels.slice(2).map((label, index) => 
+        `<span class="label hidden" id="label-${index + 2}">${label}</span>`
+      ).join('')}
+      <button class="small-btn" id="show-more" onclick="showMoreLabels(this)">Show More</button>
+      </p>
     </div>
   `
   })
+
   //Add the forms to the website
   searchResultDiv.innerHTML = formHTML;
 }
